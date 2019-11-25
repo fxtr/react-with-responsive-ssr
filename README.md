@@ -16,8 +16,12 @@ import withResponsive from 'react-with-responsive-ssr';
 
 const ResponsiveComponent = withResponsive(MyComponent);
 
-<ResponsiveComponent displayFrom="sm">Display from small screens</ResponsiveComponent>
-<ResponsiveComponent displaTo="lg">Display up to large screens</ResponsiveComponent>
+<ResponsiveComponent displayFrom="sm">
+  Display from small screens
+</ResponsiveComponent>
+<ResponsiveComponent displaTo="lg">
+  Display up to large screens
+</ResponsiveComponent>
 <ResponsiveComponent displayFrom="md" displaTo="xl">
   Display from medium up to extra large screens
 </ResponsiveComponent>
@@ -26,9 +30,12 @@ const ResponsiveComponent = withResponsive(MyComponent);
 It can also be used with `props` as second parameter for HOC
 
 ```
-const FromSM = withResponsive(TestComponent, { displayFrom: 'sm' });
-const ToLG = withResponsive(TestComponent, { displayTo: 'lg' });
-const FromMDToXL = withResponsive(TestComponent, { displayFrom: 'md', displayTo: 'xl' });
+const FromSM = withResponsive(MyComponent, { displayFrom: 'sm' });
+const ToLG = withResponsive(MyComponent, { displayTo: 'lg' });
+const FromMDToXL = withResponsive(MyComponent, {
+  displayFrom: 'md',
+  displayTo: 'xl'
+});
 
 <FromSM>Display from small screens</FromSM>
 <ToLG>Display up to large screens</ToLG>
@@ -38,6 +45,7 @@ const FromMDToXL = withResponsive(TestComponent, { displayFrom: 'md', displayTo:
 ## Media query breakpoints
 
 ### Default breakpoints
+
 ```
 {
   xs: 0,
@@ -54,6 +62,7 @@ const FromMDToXL = withResponsive(TestComponent, { displayFrom: 'md', displayTo:
 Use `setMediaQueryBreakpoints()` to set your own breakpoints.
 
 Example for NextJS in `pages/_app.js`:
+
 ```
 import React from 'react';
 import App from 'next/app';
