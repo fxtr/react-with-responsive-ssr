@@ -12,6 +12,20 @@
     "type": "git",
     "url": "git+https://github.com/kametventures/react-with-responsive-ssr.git"
   },
+  "keywords": [
+    "react",
+    "responsive",
+    "react-responsive",
+    "react-with-responsive",
+    "ssr",
+    "media-query",
+    "media-queries",
+    "matchMedia",
+    "next",
+    "nextjs",
+    "next.js",
+    "css"
+  ],
   "scripts": {
     "build": "npm run clean && babel src -d dist",
     "prepare": "npm run build",
