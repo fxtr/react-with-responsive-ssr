@@ -1,0 +1,3 @@
+{
+  "extends": ["@fixter/eslint-config-react"]
+}
