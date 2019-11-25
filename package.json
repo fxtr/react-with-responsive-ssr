@@ -1,6 +1,6 @@
 {
   "name": "react-with-responsive-ssr",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "High-Order Component to display based on media breakpoints with support for Server-Side Rendering",
   "main": "dist/index.js",
   "files": [
