@@ -1,3 +1,6 @@
 {
-  "extends": ["@fixter/eslint-config-react"]
+  "extends": ["@fixter/eslint-config-react"],
+  "rules": {
+    "react/prop-types": 0
+  }
 }

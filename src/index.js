@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import classNames from 'classnames';
-import { assignWith, isUndefined } from 'lodash';
-import { isBrowser, isEnvDev, getComponentName, generateRandomString } from './util';
+import React, { Fragment, useMemo } from 'react';
+import { isNaN } from 'lodash';
+import css from 'styled-jsx/css';
+import { isEnvDev, getComponentName } from './util';
 
 const DEFAULT_BREAKPOINTS = {
   xs: 0,
@@ -20,8 +18,8 @@ let MEDIA_QUERY_BREAKPOINTS = { ...DEFAULT_BREAKPOINTS };
 export const setMediaQueryBreakpoints = breakpoints => (MEDIA_QUERY_BREAKPOINTS = { ...breakpoints });
 
 const getDisplayWidth = (displayFrom, displayTo) => [
-  displayFrom ? MEDIA_QUERY_BREAKPOINTS[displayFrom] : null,
-  displayTo ? MEDIA_QUERY_BREAKPOINTS[displayTo] - 1 : null,
+  displayFrom ? MEDIA_QUERY_BREAKPOINTS[displayFrom] : NaN,
+  displayTo ? MEDIA_QUERY_BREAKPOINTS[displayTo] - 1 : NaN,
 ];
 
 const getInverseMediaQuery = (minWidth, maxWidth) => {
@@ -33,47 +31,31 @@ const getInverseMediaQuery = (minWidth, maxWidth) => {
 };
 
 const getMediaQueryCss = (minWidth, maxWidth) => {
-  if (!minWidth && !maxWidth) return '';
-  return css`
+  if (!minWidth && !maxWidth) return {};
+  return css.resolve`
     @media ${getInverseMediaQuery(minWidth, maxWidth)} {
       display: none !important;
     }
   `;
 };
 
-const matchesMediaQuery = query => window.matchMedia(query).matches;
-
-const MediaQuery = styled(({ Component, minWidth, maxWidth, ...props }) => <Component {...props} />)`
-  ${({ minWidth, maxWidth }) => getMediaQueryCss(minWidth, maxWidth)}
-`;
-
-const mergeProps = (props, defaultProps = {}) =>
-  assignWith({}, defaultProps, props, (a, b) => (isUndefined(b) ? a : b));
+const mergeProps = (props = {}, defaultProps = {}) => ({ ...defaultProps, ...props });
 
 export default function withResponsive(WrappedComponent, defaultProps = {}) {
   function ResponsiveWrapper(props) {
     const { displayFrom, displayTo, className, ...componentProps } = mergeProps(props, defaultProps);
 
-    // re-render at window resize
-    const [, setWindowSize] = useState(isBrowser ? [window.innerWidth, window.innerHeight] : [0, 0]);
-    // force re-hydrate and differentiate components with a random string
-    const [componentIdentifier, setComponentIdentifier] = useState(generateRandomString());
-    useEffect(() => {
-      setComponentIdentifier(generateRandomString());
-      if (!isBrowser) return null;
-      const handleResize = () => setWindowSize([window.innerWidth, window.innerHeight]);
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     const componentName = useMemo(() => getComponentName(WrappedComponent), []);
-    const classes = useMemo(() => classNames(className, componentIdentifier), [className]);
     const [minWidth, maxWidth] = useMemo(() => getDisplayWidth(displayFrom, displayTo), [
       displayFrom,
       displayTo,
     ]);
+    const [classes, jsxStyles] = useMemo(() => {
+      const { className: jsxClass, styles } = getMediaQueryCss(minWidth, maxWidth);
+      return [[className, jsxClass].filter(c => c).join(' '), styles];
+    }, [className, minWidth, maxWidth]);
 
-    if (!minWidth && !maxWidth) {
+    if (isNaN(minWidth) && isNaN(maxWidth)) {
       if (isEnvDev) {
         console.warn(
           'Warning: Not optimal to use "withResponsive" without display boundaries',
@@ -83,29 +65,12 @@ export default function withResponsive(WrappedComponent, defaultProps = {}) {
       return <WrappedComponent {...componentProps} className={classes} />;
     }
 
-    const WCMQ = (
-      <MediaQuery
-        Component={WrappedComponent}
-        minWidth={minWidth}
-        maxWidth={maxWidth}
-        {...componentProps}
-        className={classes}
-      />
+    return (
+      <Fragment>
+        <WrappedComponent {...componentProps} className={classes} />
+        {jsxStyles}
+      </Fragment>
     );
-
-    if (isBrowser) return !matchesMediaQuery(getInverseMediaQuery(minWidth, maxWidth)) && WCMQ;
-    return WCMQ; // SSR
   }
-
-  ResponsiveWrapper.propTypes = {
-    displayFrom: PropTypes.oneOf(Object.keys(MEDIA_QUERY_BREAKPOINTS)),
-    displayTo: PropTypes.oneOf(Object.keys(MEDIA_QUERY_BREAKPOINTS)),
-  };
-
-  ResponsiveWrapper.defaultProps = {
-    displayFrom: undefined,
-    displayTo: undefined,
-  };
-
   return ResponsiveWrapper;
 }
