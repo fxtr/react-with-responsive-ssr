@@ -2,35 +2,23 @@
 
 exports[`renders with custom breakpoints with inline props: default-breakpoints:from-mobile 1`] = `
 <div
-  class="test-component randomstring"
+  class="test-component "
 >
   From mobile
 </div>
 `;
 
 exports[`renders with custom breakpoints with inline props: default-breakpoints:from-tablet-to-desktop 1`] = `
-@media (max-width:1023px) and (min-width:1440px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-3298173018"
 >
   From tablet - To desktop
 </div>
 `;
 
 exports[`renders with custom breakpoints with inline props: default-breakpoints:to-desktop 1`] = `
-@media (min-width:1440px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-3747896157"
 >
   To desktop
 </div>
@@ -38,119 +26,71 @@ exports[`renders with custom breakpoints with inline props: default-breakpoints:
 
 exports[`renders with custom breakpoints with props: custom-breakpoints:from-mobile 1`] = `
 <div
-  class="test-component randomstring"
+  class="test-component "
 >
   From mobile
 </div>
 `;
 
 exports[`renders with custom breakpoints with props: custom-breakpoints:from-tablet-to-desktop 1`] = `
-@media (max-width:1023px) and (min-width:1440px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-3298173018"
 >
   From tablet - To desktop
 </div>
 `;
 
 exports[`renders with custom breakpoints with props: custom-breakpoints:to-desktop 1`] = `
-@media (min-width:1440px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-3747896157"
 >
   To desktop
 </div>
 `;
 
 exports[`renders with default breakpoints with inline props: default-breakpoints:from-md-to-xl 1`] = `
-@media (max-width:767px) and (min-width:1200px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-1213670158"
 >
   From md - To xl
 </div>
 `;
 
 exports[`renders with default breakpoints with inline props: default-breakpoints:from-sm 1`] = `
-@media (max-width:575px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-2917367701"
 >
   From sm
 </div>
 `;
 
 exports[`renders with default breakpoints with inline props: default-breakpoints:to-lg 1`] = `
-@media (min-width:992px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-242699950"
 >
   To lg
 </div>
 `;
 
 exports[`renders with default breakpoints with props: default-breakpoints:from-md-to-xl 1`] = `
-@media (max-width:767px) and (min-width:1200px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-1213670158"
 >
   From md - To xl
 </div>
 `;
 
 exports[`renders with default breakpoints with props: default-breakpoints:from-sm 1`] = `
-@media (max-width:575px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-2917367701"
 >
   From sm
 </div>
 `;
 
 exports[`renders with default breakpoints with props: default-breakpoints:to-lg 1`] = `
-@media (min-width:992px) {
-  .c0 {
-    display: none !important;
-  }
-}
-
 <div
-  class="test-component c0 randomstring"
+  class="test-component jsx-242699950"
 >
   To lg
 </div>

@@ -1,28 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withResponsive, { setMediaQueryBreakpoints } from '../index';
 
-jest.mock('../util', () => ({
-  ...jest.requireActual('../util'),
-  generateRandomString: jest.fn().mockReturnValue('randomstring'),
-}));
+// @todo
+// mock `styled-jsx/css` `resolve()` to have the resulting css in snapshot
+// tried to mock but it didn't worked only for this
+// try again later
 
-const TestComponent = ({ children, className, ...props }) => (
-  <div className={classNames('test-component', className)} {...props}>
-    {children}
-  </div>
+const TestComponent = ({ className, ...props }) => (
+  <div className={`test-component ${className}`} {...props} />
 );
-
-TestComponent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
-
-TestComponent.defaultProps = {
-  className: '',
-};
 
 describe('renders with default breakpoints', () => {
   it('with props', () => {
