@@ -30,7 +30,7 @@
     "build": "webpack --mode production",
     "prepare": "npm run build",
     "release": "np --no-release-draft",
-    "test": "run-s test:lint test:coverage",
+    "test": "run-s test:lint",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "test:lint": "eslint .",
@@ -53,11 +53,11 @@
     ]
   },
   "peerDependencies": {
-    "react": "^16.12.0"
+    "react": "^16.12.0",
+    "styled-jsx": "^3.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "styled-jsx": "^3.2.4"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
@@ -74,6 +74,7 @@
     "husky": "^4.0.10",
     "jest": "^24.9.0",
     "lint-staged": "^10.0.1",
+    "styled-jsx": "^3.2.1",
     "np": "^5.2.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
