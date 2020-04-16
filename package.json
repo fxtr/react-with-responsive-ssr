@@ -30,7 +30,7 @@
     "build": "webpack --mode production",
     "prepare": "npm run build",
     "release": "np --no-release-draft",
-    "test": "run-s test:lint",
+    "test": "run-s test:lint test:coverage",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "test:lint": "eslint .",
